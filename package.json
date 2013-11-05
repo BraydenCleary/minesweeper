@@ -1,6 +1,10 @@
 {
   "name": "minesweeper",
   "version": "0.0.1",
+  "dependencies": {
+    "combined-stream": "0.0.x",
+    "express": "3.4.x"
+  },
   "engines": {
     "node": "0.10.x",
     "npm": "1.2.x"
