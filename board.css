@@ -1,0 +1,27 @@
+.tile-container{
+  box-sizing: border-box;
+  float: left;
+  text-align: center;
+
+  border: 1px solid black;
+}
+
+.blank, .mine{
+  height: 7.5%;
+}
+
+.blank, .mine{
+  background-color: #606060;
+}
+
+.blank.clicked{
+  background-color: #A0A0A0;
+}
+
+.mine.clicked{
+  background-color: red;
+}
+
+.tile img{
+  height: 100%;
+}

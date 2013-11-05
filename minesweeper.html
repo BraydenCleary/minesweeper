@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <script src='./angular.min.js'></script>
+    <script src='./jquery.min.js'></script>
+    <script src='./minesweeper_module.js'></script>
+    <script src='./board_controller.js'></script>
+    <script src='./tile_controller.js'></script>
+    <script src='./underscore.min.js'></script>
+    <script src='./tile.js'></script>
+    <script src='./clicked.js'></script>
+    <link rel='stylesheet' href='./board.css'></link>
+  </head>
+  <body ng-app="mineSweeper">
+    <div class='board' ng-controller = "boardController">
+      <div class='tile-container' ng-repeat = "tileType in board" ng-style="styleTile()">
+        <div tile tile-index={{$index}} class={{tileType}} adjacent-mines={{calculateAdjacentMines($index)}} adjacent-tiles={{surroundingTiles($index)}}></div>
+      </div>
+      <div class='you-win' ng-show="winner">You win!</div>
+      <div class='you-lose' ng-show="loser">You lose
+        <div class='retry'>
+          Click here to retry!
+          <button ng-click="resetBoard(rows)">Reset
+          </button>
+        </dvi>
+      </div>
+    </div>
+  </body>
+</html>
