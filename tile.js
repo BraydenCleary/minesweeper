@@ -2,27 +2,33 @@ mineSweeper.directive("tile", ['$rootScope', function($rootScope){
   return {
     restrict: 'A',
     link: function(scope, el, attrs){
-      el.bind('click', function(e){
+      var handleClick = function(domEl){
         if (!$rootScope.winner && !$rootScope.loser){
-          var tileIndex = this.getAttribute('tile-index');
-          var adjacentMines = this.getAttribute('adjacent-mines');
+          var tileIndex = domEl.attr('tile-index');
+          var adjacentMines = domEl.attr('adjacent-mines');
 
           $rootScope.$broadcast('tileClicked', {"id": tileIndex});
-          $(this).addClass('clicked');
 
-          if (this.classList.contains('mine')){
-            this.innerHTML = "<img src='mine.jpg'>"
-            $rootScope.$broadcast('mineClicked');
-          } else if (adjacentMines == 0) {
-            var adjacentTiles = JSON.parse(this.getAttribute('adjacent-tiles'));
-            _.each(adjacentTiles, function(tile){
-              $(".tile[tile-index=" + tile + "]").trigger('click');
-            });
-            this.innerHTML = "<div></div>";
-          } else {
-            this.innerHTML = "<div>" + adjacentMines + "</div>"
+          if (!domEl.hasClass('clicked')){
+            domEl.addClass('clicked');
+            if (domEl.hasClass('mine')){
+              domEl.html("<img src='mine.jpg'>");
+              $rootScope.$broadcast('mineClicked');
+            } else if (adjacentMines == 0) {
+              var adjacentTiles = JSON.parse(domEl.attr('adjacent-tiles'));
+              _.each(adjacentTiles, function(tile){
+                handleClick($(".tile[tile-index=" + tile + "]"));
+              });
+              domEl.html("<div></div>");
+            } else {
+              domEl.html("<div>" + adjacentMines + "</div>");
+            }
           }
         }
+      }
+
+      el.bind('click', function(e){
+        handleClick($(this));
       });
     }
   }
