@@ -4,17 +4,18 @@
     <link href="app.css" rel="stylesheet">
   </head>
   <body ng-app="mineSweeper">
+    <header>
+      <h1 class='welcome'>Welcome to Minesweeper</h1>
+      <h5 class='by'>Brought to you by <a href='http://braydencleary.com' target="_blank">Brayden Cleary</a></h5>
+    </header>
     <div class='board' ng-controller = "boardController">
       <div class='tile-container' ng-repeat = "tileType in board" ng-style="styleTile()">
         <div tile tile-index={{$index}} class={{tileType}} adjacent-mines={{calculateAdjacentMines($index)}} adjacent-tiles={{surroundingTiles($index)}}></div>
       </div>
       <div class='you-win' ng-show="winner">You win!</div>
       <div class='you-lose' ng-show="loser">You lose
-        <div class='retry'>
-          Click here to retry!
-          <button ng-click="resetBoard(rows)">Reset
-          </button>
-        </dvi>
+        <span class='retry'>Click here to retry!</span>
+        <button ng-click="resetBoard(rows)">Reset</button>
       </div>
     </div>
   </body>

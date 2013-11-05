@@ -13,6 +13,5 @@ var jsFiles  = [
   'underscore.min.js',
   'minesweeper_module.js',
   'tile.js',
-  'tile_controller.js',
   'board_controller.js',
 ]

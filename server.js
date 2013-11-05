@@ -25,7 +25,6 @@ app.get('/app.css', function(req, res){
 });
 
 app.get('/mine.jpg', function(req, res){
-  console.log('mine!');
   res.sendfile('./mine.jpg');
 })
 
