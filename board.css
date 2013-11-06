@@ -47,3 +47,11 @@
 .cheat.mine{
   background-color: red;
 }
+
+.you-win{
+  color: green;
+}
+
+.you-lose{
+  color: red;
+}
