@@ -6,14 +6,21 @@
   <body ng-app="mineSweeper">
     <header>
       <h1 class='welcome'>Welcome to Minesweeper<span class='by'> Brought to you by: <a href='http://braydencleary.com' target="_blank">Brayden Cleary</a></span></h1>
-      <h2 class='info'>There are 10 mines and 64 total tiles.</h2>
-      <h2 class='directions'>Click to uncover tile or click + alt-key to flag a tile.</h2>
-      <h2 class='how-to-win'>Ways to win:
+      <h4 class='info'>
+        There are 10 mines and 64 total tiles.
+        <ul>
+          <li>Click to uncover tile</li>
+          <li>Click + alt-key to 'flag' a tile <span class='blue'>(blue background)</span></li>
+          <li>Click + alt-key a flagged tile to 'question mark' a tile <span class='pink'>(pink background)</span></li>
+          <li>Reveal mines by cliking 'toggle cheat' <span class='red'>(red background)</span>
+        </ul>
+      </h4>
+      <h4 class='how-to-win'>Ways to win:
         <ol>
           <li>Clicking on all non-mine (54) tiles.
           <li>Flagging all the mines and clicking the 'check' button.
         </ol>
-      </h2>
+      </h4>
     </header>
     <div class='board' ng-controller = "boardController">
       <div class='board-header'>

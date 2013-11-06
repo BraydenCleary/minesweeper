@@ -55,3 +55,19 @@
 .you-lose{
   color: red;
 }
+
+.blue{
+  color: blue;
+}
+
+.pink{
+  color: pink;
+}
+
+.red{
+  color: red;
+}
+
+ol, ul{
+  margin: 0;
+}
