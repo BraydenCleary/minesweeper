@@ -14,4 +14,5 @@ var jsFiles  = [
   'minesweeper_module.js',
   'tile.js',
   'board_controller.js',
+  'timer.js'
 ]

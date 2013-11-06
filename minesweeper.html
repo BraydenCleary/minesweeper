@@ -5,19 +5,33 @@
   </head>
   <body ng-app="mineSweeper">
     <header>
-      <h1 class='welcome'>Welcome to Minesweeper</h1>
-      <h2 class='directions'>There are 10 mines and 64 total tiles. You win by clicking on all non-mine (54) tiles.</h2>
-      <h5 class='by'>Brought to you by <a href='http://braydencleary.com' target="_blank">Brayden Cleary</a></h5>
+      <h1 class='welcome'>Welcome to Minesweeper<span class='by'> Brought to you by: <a href='http://braydencleary.com' target="_blank">Brayden Cleary</a></span></h1>
+      <h2 class='info'>There are 10 mines and 64 total tiles.</h2>
+      <h2 class='directions'>Click to uncover tile or click + alt-key to flag a tile.</h2>
+      <h2 class='how-to-win'>Ways to win:
+        <ol>
+          <li>Clicking on all non-mine (54) tiles.
+          <li>Flagging all the mines and clicking the 'check' button.
+        </ol>
+      </h2>
     </header>
     <div class='board' ng-controller = "boardController">
-      <div class='tile-container' ng-repeat = "tileType in board" ng-style="styleTile()">
-        <div tile tile-index={{$index}} class={{tileType}} adjacent-mines={{calculateAdjacentMines($index)}} adjacent-tiles={{surroundingTiles($index)}}></div>
-      </div>
-      <div class='you-win' ng-show="winner">You win!</div>
-      <div class='you-lose' ng-show="loser">You lose
-        <span class='retry'>Click here to retry!</span>
+      <div class='board-header'>
+        <div class='timer'>
+          Timer: <timer auto-start=false></timer>
+        </div>
+        <div class='mine-count'>Number of Mines: {{numMines}}</div>
+        <div class='mines-flagged'>Number of Mines Flagged: {{flaggedMineCount}}</div>
+        <div class='check'><button ng-click="checkBoard()">Check Board</button></div>
         <button ng-click="resetBoard(rows)">Reset</button>
+        <button ng-click="flipCheating()">Toggle Cheat</button>
+        <div class='you-win' ng-show="winner">You win!</div>
+        <div class='you-lose' ng-show="loser">You lose</div>
       </div>
+      <div class='tile-container' ng-repeat = "tileType in board" ng-style="styleTile()">
+        <div tile tile-index={{$index}} class={{tileType}} adjacent-mines={{calculateAdjacentMines($index)}} adjacent-tiles={{surroundingTiles($index)}} ng-class="isCheating()"></div>
+      </div>
+
     </div>
   </body>
 </html>
