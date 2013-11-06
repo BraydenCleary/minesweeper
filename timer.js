@@ -32,7 +32,6 @@ mineSweeper.directive('timer', ['$compile', function ($compile) {
       });
 
       $scope.$on('timer-stop', function () {
-        debugger
         $scope.stop();
       });
 

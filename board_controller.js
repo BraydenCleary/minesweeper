@@ -69,9 +69,7 @@ mineSweeper.controller("boardController", ["$timeout", "$rootScope", "$scope", f
       youLose();
     } else {
       var incorrectlyFlaggedMines = _.difference(_.map($scope.flaggedMines, function(num){return parseInt(num)}), $scope.mineIndicies);
-      debugger
       if (incorrectlyFlaggedMines.length == 0){
-        debugger
         youWin();
       } else {
         youLose();
