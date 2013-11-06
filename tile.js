@@ -27,7 +27,7 @@ mineSweeper.directive("tile", ['$rootScope', function($rootScope){
               });
               domEl.html("<div></div>");
             } else {
-              domEl.html("<div>" + adjacentMines + "</div>");
+              domEl.html("<div class='adjacent-mine-count'>" + adjacentMines + "</div>");
             }
           }
         }

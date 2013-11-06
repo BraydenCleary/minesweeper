@@ -7,7 +7,7 @@
 }
 
 .blank, .mine{
-  height: 7.5%;
+  height: 60px;
 }
 
 .blank, .mine{
@@ -70,4 +70,12 @@
 
 ol, ul{
   margin: 0;
+}
+
+.adjacent-mine-count{
+  line-height: 60px;
+  color: white;
+  font-weight: bold;
+  vertical-align: middle;
+  font-size: 20px;
 }
