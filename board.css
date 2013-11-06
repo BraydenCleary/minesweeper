@@ -36,11 +36,11 @@
   margin-left: 2.5%;
 }
 
-.flagged{
+.flagged, .cheat.mine.flagged{
   background-color: blue;
 }
 
-.question-marked{
+.question-marked, .cheat.mine.question-marked{
   background-color: pink;
 }
 
