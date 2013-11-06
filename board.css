@@ -70,6 +70,11 @@
 
 ol, ul{
   margin: 0;
+  font-weight: normal;
+}
+
+h1, h4{
+  margin: 5px 0px;
 }
 
 .adjacent-mine-count{
