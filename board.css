@@ -21,3 +21,29 @@
 .tile img{
   height: 100%;
 }
+
+.by{
+  font-weight: normal;
+  font-size: 12px;
+}
+
+.board-header{
+  width: 100%;
+}
+
+.board-header > *{
+  display: inline-block;
+  margin-left: 2.5%;
+}
+
+.flagged{
+  background-color: blue;
+}
+
+.question-marked{
+  background-color: pink;
+}
+
+.cheat.mine{
+  background-color: red;
+}
