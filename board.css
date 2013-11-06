@@ -84,3 +84,7 @@ h1, h4{
   vertical-align: middle;
   font-size: 20px;
 }
+
+.game-info{
+  font-weight: bold;
+}

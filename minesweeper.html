@@ -27,10 +27,10 @@
     <div class='board' ng-controller = "boardController">
       <div class='board-header'>
         <div class='timer'>
-          Timer: <timer auto-start=false></timer>
+          <span class='game-info'>Timer:  </span></b><timer auto-start=false></timer>
         </div>
-        <div class='mine-count'>Number of Mines: {{numMines}}</div>
-        <div class='mines-flagged'>Number of Mines Flagged: {{flaggedMineCount}}</div>
+        <div class='mine-count'><span class='game-info'>Number of Mines: </span>{{numMines}}</div>
+        <div class='mines-flagged'><span class='game-info'>Number of Mines Flagged: </span>{{flaggedMineCount}}</div>
         <div class='check'><button ng-click="checkBoard()">Check Board</button></div>
         <button ng-click="resetBoard(rows)">Reset</button>
         <button ng-click="flipCheating()">Toggle Cheat</button>
