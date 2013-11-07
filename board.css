@@ -6,7 +6,7 @@
   border: 1px solid black;
 }
 
-.blank, .mine{
+.tile{
   height: 60px;
 }
 
@@ -37,11 +37,17 @@
 }
 
 .flagged, .cheat.mine.flagged{
-  background-color: blue;
+  background-image: url('flag.jpg');
+  background-size: 60px;
+  background-repeat: no-repeat;
+  background-position-x: 50%;
 }
 
 .question-marked, .cheat.mine.question-marked{
-  background-color: pink;
+  background-image: url('question_mark.jpg');
+  background-size: 60px;
+  background-repeat: no-repeat;
+  background-position-x: 50%;
 }
 
 .cheat.mine{

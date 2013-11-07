@@ -24,9 +24,10 @@ app.get('/app.css', function(req, res){
   clientCSS().pipe(res);
 });
 
-app.get('/mine.jpg', function(req, res){
-  res.sendfile('./mine.jpg');
-})
+app.get('/*.jpg', function(req,res) {
+  var filename = req.params[0];
+  res.sendfile('images/' + filename + '.jpg');
+});
 
 var port   = process.env.PORT || 4000
 
