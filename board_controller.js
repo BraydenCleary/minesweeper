@@ -3,14 +3,47 @@ mineSweeper.controller("boardController", ["$timeout", "$rootScope", "$scope", f
   $scope.flaggedMines = [];
   $scope.flaggedMineCount = 0;
   $scope.rows = 8;
-  var numNonMines = $scope.rows * $scope.rows - $scope.numMines;
   $scope.board = [];
   $scope.tilesRevealed = [];
   $scope.tilesRevealedCount = 0;
+  var numNonMines = $scope.rows * $scope.rows - $scope.numMines;
 
   $scope.$on('flagAdded', function(e, data){
     addFlaggedMine(data.id);
   })
+
+  $scope.$on('flagRemoved', function(e, data){
+    destroyFlaggedMine(data.id);
+  })
+
+  $scope.$watch('tilesRevealedCount', function(newVal){
+    if (newVal == numNonMines){
+      youWin();
+    }
+  });
+
+  $scope.$on('mineClicked', function(){
+    youLose();
+  });
+
+  $scope.$on('tileClicked', function(e, data){
+    var tileFlipped = _.contains($scope.tilesRevealed, data.id)
+    if (!tileFlipped){
+      $scope.tilesRevealed.push(data.id)
+      $scope.tilesRevealedCount += 1;
+      $scope.$apply();
+    }
+  });
+
+  var generateMineIndicies = function(){
+    var mineIndicies = [];
+    _.each($scope.board, function(tile, index){
+      if (tile == 'mine tile'){
+        mineIndicies.push(index)
+      }
+    });
+    return mineIndicies;
+  }
 
   var addFlaggedMine = function(id){
     $scope.flaggedMines.push(id);
@@ -37,46 +70,6 @@ mineSweeper.controller("boardController", ["$timeout", "$rootScope", "$scope", f
     $rootScope.$broadcast('timer-stop');
   }
 
-  $scope.$on('flagRemoved', function(e, data){
-    destroyFlaggedMine(data.id);
-  })
-
-  $scope.$watch('tilesRevealedCount', function(newVal){
-    if (newVal == numNonMines){
-      youWin();
-    }
-  });
-
-  $scope.$on('mineClicked', function(){
-    youLose();
-  });
-
-  $scope.$on('tileClicked', function(e, data){
-    var tileFlipped = _.contains($scope.tilesRevealed, data.id)
-    if (!tileFlipped){
-      $scope.tilesRevealed.push(data.id)
-      $scope.tilesRevealedCount += 1;
-      $scope.$apply();
-    }
-  });
-
-  $scope.resetBoard = function(rows){
-    window.location.reload();
-  }
-
-  $scope.checkBoard = function(){
-    if ($scope.flaggedMines.length != $scope.numMines){
-      youLose();
-    } else {
-      var incorrectlyFlaggedMines = _.difference(_.map($scope.flaggedMines, function(num){return parseInt(num)}), $scope.mineIndicies);
-      if (incorrectlyFlaggedMines.length == 0){
-        youWin();
-      } else {
-        youLose();
-      }
-    }
-  }
-
   var generateBlankTiles = function(tileCount){
     _(tileCount).times(function(){
       $scope.board.push('blank tile');
@@ -87,6 +80,24 @@ mineSweeper.controller("boardController", ["$timeout", "$rootScope", "$scope", f
     _(mineCount).times(function(){
       $scope.board.push('mine tile');
     })
+  }
+
+  $scope.resetBoard = function(rows){
+    window.location.reload();
+  }
+
+  $scope.checkBoard = function(){
+    if ($scope.flaggedMines.length != $scope.numMines){
+      youLose();
+    } else {
+      var flaggedMines = _.map($scope.flaggedMines, function(num){ return parseInt(num) });
+      var incorrectlyFlaggedMines = _.difference(flaggedMines, $scope.mineIndicies);
+      if (_.isEmpty(incorrectlyFlaggedMines)){
+        youWin();
+      } else {
+        youLose();
+      }
+    }
   }
 
   $scope.flipCheating = function(){
@@ -172,16 +183,6 @@ mineSweeper.controller("boardController", ["$timeout", "$rootScope", "$scope", f
     return _.filter(surroundingTiles, function(tile){ return tile == 'mine tile'; }).length;
   }
 
-  var generateMineIndicies = function(){
-    var mineIndicies = [];
-    _.each($scope.board, function(tile, index){
-      if (tile == 'mine tile'){
-        mineIndicies.push(index)
-      }
-    });
-    return mineIndicies;
-  }
-
   $scope.generateBoard = function(rows){
     var boardSize = rows * rows
     generateBlankTiles(boardSize - $scope.numMines);
@@ -193,9 +194,6 @@ mineSweeper.controller("boardController", ["$timeout", "$rootScope", "$scope", f
   $scope.styleTile = function(){
     return {'width': 100 / $scope.rows + "%"};
   }
-
-
-  $scope.generateBoard($scope.rows);
 
   $scope.surroundingTiles = function(index){
     var rows = $scope.rows;
@@ -264,4 +262,6 @@ mineSweeper.controller("boardController", ["$timeout", "$rootScope", "$scope", f
     }
     return surroundingTiles;
   }
+
+  $scope.generateBoard($scope.rows);
 }])
