@@ -17,6 +17,7 @@ mineSweeper.directive("tile", ['$rootScope', function($rootScope){
 
           if (!domEl.hasClass('clicked') && !domEl.hasClass('flagged')){
             domEl.addClass('clicked');
+            domEl.removeClass('question-marked');
             if (domEl.hasClass('mine')){
               domEl.html("<img src='mine.jpg'>");
               $rootScope.$broadcast('mineClicked');
@@ -34,7 +35,7 @@ mineSweeper.directive("tile", ['$rootScope', function($rootScope){
       }
 
       var handleAltClick = function(domEl){
-        if (!$rootScope.winner && !$rootScope.loser){
+        if (!$rootScope.winner && !$rootScope.loser && !domEl.hasClass('clicked')){
           if (!$rootScope.timerStarted){
             $rootScope.timerStarted = true;
             $rootScope.$broadcast('timer-start');
