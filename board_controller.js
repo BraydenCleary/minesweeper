@@ -9,11 +9,15 @@ mineSweeper.controller("boardController", ["$timeout", "$rootScope", "$scope", f
   var numNonMines = $scope.rows * $scope.rows - $scope.numMines;
 
   $scope.$on('flagAdded', function(e, data){
-    addFlaggedMine(data.id);
+    $timeout(function(){
+      addFlaggedMine(data.id);
+    });
   })
 
   $scope.$on('flagRemoved', function(e, data){
-    destroyFlaggedMine(data.id);
+    $timeout(function(){
+      destroyFlaggedMine(data.id);
+    });
   })
 
   $scope.$watch('tilesRevealedCount', function(newVal){
@@ -27,13 +31,18 @@ mineSweeper.controller("boardController", ["$timeout", "$rootScope", "$scope", f
   });
 
   $scope.$on('tileClicked', function(e, data){
-    var tileFlipped = _.contains($scope.tilesRevealed, data.id)
-    if (!tileFlipped){
-      $scope.tilesRevealed.push(data.id)
-      $scope.tilesRevealedCount += 1;
-      $scope.$apply();
-    }
+    $timeout(function(){
+      addToFlipped(data.id);
+    });
   });
+
+  var addToFlipped = function(id){
+    var tileFlipped = _.contains($scope.tilesRevealed, id)
+    if (!tileFlipped){
+      $scope.tilesRevealed.push(id)
+      $scope.tilesRevealedCount += 1;
+    }
+  }
 
   var generateMineIndicies = function(){
     var mineIndicies = [];
@@ -48,13 +57,11 @@ mineSweeper.controller("boardController", ["$timeout", "$rootScope", "$scope", f
   var addFlaggedMine = function(id){
     $scope.flaggedMines.push(id);
     $scope.flaggedMineCount += 1;
-    $scope.$apply();
   }
 
   var destroyFlaggedMine = function(id){
     $scope.flaggedMines = _.without($scope.flaggedMines, id);
     $scope.flaggedMineCount -= 1;
-    $scope.$apply();
   }
 
   var youLose = function(){
