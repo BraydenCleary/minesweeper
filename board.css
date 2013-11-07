@@ -54,6 +54,11 @@
   background-color: red;
 }
 
+.end{
+  font-size: 17px;
+  font-weight: bold;
+}
+
 .you-win{
   color: green;
 }
