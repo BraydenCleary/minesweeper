@@ -89,7 +89,7 @@ mineSweeper.controller("boardController", ["$timeout", "$rootScope", "$scope", f
     })
   }
 
-  $scope.resetBoard = function(rows){
+  $scope.resetBoard = function(){
     window.location.reload();
   }
 

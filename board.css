@@ -99,3 +99,10 @@ h1, h4{
 .game-info{
   font-weight: bold;
 }
+
+.boom {
+  background-image: url('mine.jpg');
+  background-size: 60px;
+  background-repeat: no-repeat;
+  background-position-x: 50%;
+}

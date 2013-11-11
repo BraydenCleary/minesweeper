@@ -32,15 +32,14 @@
         <div class='mine-count'><span class='game-info'>Number of Mines: </span>{{numMines}}</div>
         <div class='mines-flagged'><span class='game-info'>Number of Mines Flagged: </span>{{flaggedMineCount}}</div>
         <div class='check'><button ng-click="checkBoard()">Check Board</button></div>
-        <button ng-click="resetBoard(rows)">Reset</button>
+        <button ng-click="resetBoard()">Reset</button>
         <button ng-click="flipCheating()">Toggle Cheat</button>
         <div class='you-win end' ng-show="winner">You win!</div>
-        <div class='you-lose end' ng-show="loser">You lose</div>
+        <div class='you-lose end' ng-show="loser">You lose!</div>
       </div>
       <div class='tile-container' ng-repeat = "tileType in board" ng-style="styleTile()">
         <div tile tile-index={{$index}} class={{tileType}} adjacent-mines={{calculateAdjacentMines($index)}} adjacent-tiles={{surroundingTiles($index)}} ng-class="isCheating()"></div>
       </div>
-
     </div>
   </body>
 </html>
